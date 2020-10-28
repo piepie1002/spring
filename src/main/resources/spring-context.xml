@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util https://www.springframework.org/schema/util/spring-util.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+    <!--开启注释注入-->
+    <context:component-scan base-package="com.pie.spring"/>
+    <!--spring 给创建对象-->
+    <!--spring 核心配置文件-->
+    <!-- ref 指向容器内的另一个对象-->
+    <!-- p: xxx属性 ="赋值" xxx-ref = "容器内另一个对象"-->
+    <bean id="user" class="com.pie.spring.bean.User"
+          scope="prototype" 
+          init-method="init"
+          destroy-method="destroy"
+          lazy-init="true" p:username="admin" p:address-ref="address">
+        <!--<property name="username" value="zs"/>-->
+        <!--<property name="address" ref="address"/>-->
+        <property name="list" ref="list">
+           <!-- <list>
+                <value>1</value>
+                <value>2</value>
+                <value>3</value>
+                <value>4</value>
+            </list>-->
+        </property>
+    </bean>
+    <bean id="address" class="com.pie.spring.bean.Address"/>
+    <util:list id="list">
+        <value>1</value>
+        <value>2</value>
+        <value>3</value>
+        <value>4</value>
+    </util:list>
+    
+</beans>
